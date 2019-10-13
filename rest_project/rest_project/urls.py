@@ -9,6 +9,7 @@ router.register(r'groups', views.GroupViewSet)
 router.register(r'products', views.ProductViewSet)
 
 urlpatterns = [
+    path('', include('main.urls')),
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
