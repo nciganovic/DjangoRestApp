@@ -7,5 +7,9 @@ class Product(models.Model):
     rating = models.DecimalField(max_digits=3, decimal_places=2, validators=[MinValueValidator(0), MaxValueValidator(5)])
     review_num = models.IntegerField(default=0)
     price = models.FloatField(default=0)
+    owner = models.ForeignKey('auth.User', related_name='product', on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.title
+        
 
