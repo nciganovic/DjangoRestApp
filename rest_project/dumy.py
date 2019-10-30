@@ -9,6 +9,7 @@ title_arr = [
     'Title 8 Auto',
     'Title 9 Auto',
     'Title 10 Auto',
+    'Title 11 Auto', #NEW TITLE 11
 ]
 
 rating_arr = [
