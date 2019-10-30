@@ -2,7 +2,7 @@ import pyautogui
 import os 
 import time
 #import scrape
-
+import dumy
 
 top_down = (1919, 1071)
 browser_icon = (248, 1071)
@@ -20,7 +20,14 @@ pyautogui.click(product_link)
 time.sleep(1)
 pyautogui.click(product_link)
 
-for i in range(7):
+for i in range(3):
     pyautogui.typewrite('\t')
 
-pyautogui.typewrite()
+pyautogui.typewrite(f'{dumy.title_arr[0]} \t')
+pyautogui.typewrite(f'{dumy.rating_arr[0]} \t')
+pyautogui.typewrite(f'{dumy.review_arr[0]} \t')
+pyautogui.typewrite(f'{dumy.price_arr[0]} \t')
+pyautogui.typewrite(f'{dumy.owner_arr[0]} \t')
+pyautogui.typewrite(f'\t')
+pyautogui.typewrite(f'{dumy.link_arr[0]} \t')
+pyautogui.typewrite(f'\n')

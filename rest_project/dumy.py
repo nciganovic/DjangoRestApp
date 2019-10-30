@@ -9,7 +9,6 @@ title_arr = [
     'Title 8 Auto',
     'Title 9 Auto',
     'Title 10 Auto',
-    'Title 11 Auto', #NEW TITLE 11
 ]
 
 rating_arr = [
@@ -62,4 +61,17 @@ owner_arr = [
     'Owner 8',
     'Owner 9',
     'Owner 10',
+]
+
+link_arr = [
+    'Link 1',
+    'Link 2',
+    'Link 3',
+    'Link 4',
+    'Link 5',
+    'Link 6',
+    'Link 7',
+    'Link 8',
+    'Link 9',
+    'Link 10',
 ]
