@@ -1,33 +1,25 @@
 import pyautogui
 import os 
 import time
-#import scrape
-import dumy
+from dumy import *
 
-top_down = (1919, 1071)
-browser_icon = (248, 1071)
-search_in_browser = (156, 69)
-product_link = (574, 529)
+pyautogui.FAILSAFE= True
 
-link = 'https://rest-project-amazon.herokuapp.com/\n'
+title = (519, 739)
 
-pyautogui.click(top_down)
-pyautogui.click(browser_icon) #click on browser icon
-pyautogui.click(search_in_browser)
-pyautogui.typewrite(link, 0.05)
-time.sleep(2)
-pyautogui.click(product_link)
-time.sleep(1)
-pyautogui.click(product_link)
+pyautogui.click(1919, 1071)
+pyautogui.click(353, 1072)
 
-for i in range(3):
+for i in range(len(title_arr)):
+    pyautogui.moveTo(519, 739, 2)
+    time.sleep(1)
+    pyautogui.click(title)
     pyautogui.typewrite('\t')
-
-pyautogui.typewrite(f'{dumy.title_arr[0]} \t')
-pyautogui.typewrite(f'{dumy.rating_arr[0]} \t')
-pyautogui.typewrite(f'{dumy.review_arr[0]} \t')
-pyautogui.typewrite(f'{dumy.price_arr[0]} \t')
-pyautogui.typewrite(f'{dumy.owner_arr[0]} \t')
-pyautogui.typewrite(f'\t')
-pyautogui.typewrite(f'{dumy.link_arr[0]} \t')
-pyautogui.typewrite(f'\n')
+    pyautogui.typewrite(f'{title_arr[i]}\t', 0.1)
+    pyautogui.typewrite(f'{rating_arr[i]}\t', 0.1)
+    pyautogui.typewrite(f'{review_arr[i]}\t', 0.1)
+    pyautogui.typewrite(f'{price_arr[i]}\t', 0.1)
+    pyautogui.typewrite(f'{owner_arr[i]}\t\t', 0.1)
+    pyautogui.typewrite(f'{link_arr[i]}\t', 0.1)
+    pyautogui.typewrite(f'\n', 0.1)
+    time.sleep(1)
