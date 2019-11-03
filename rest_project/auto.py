@@ -7,8 +7,11 @@ pyautogui.FAILSAFE= True
 
 title = (519, 739)
 
-pyautogui.click(1919, 1071)
-pyautogui.click(353, 1072)
+#pyautogui.click(1919, 1071)
+#pyautogui.click(353, 1072)
+
+#RESOLUTION 1920x1080, LEFT HALF OF WINDOW NEEDS TO BE https://rest-project-amazon.herokuapp.com/products/
+
 
 for i in range(len(title_arr)):
     pyautogui.moveTo(519, 739, 2)
