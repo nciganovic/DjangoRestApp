@@ -14,30 +14,35 @@ def make_soup(url):
 
 amazon_link = 'https://www.amazon.com/'
 
-url = 'https://www.amazon.com/s?k=laptop&ref=nb_sb_noss_2'
-
-soup = make_soup(url)
-
-tags = soup.find_all('a', {"class": "a-link-normal a-text-normal"})
+urls = [
+    "https://www.amazon.com/s?k=laptop&ref=nb_sb_noss_2",
+    "https://www.amazon.com/s?k=desktop+monitor&ref=nb_sb_noss_2",
+    "https://www.amazon.com/s?k=keyboard&ref=nb_sb_noss_1",
+]
 
 links = []
+print('############################## SEARCHING FOR LINKS #############################\n')
+for idx, url in enumerate(urls):
+    soup = make_soup(url)
 
-for tag in tags:
-    tag = str(tag) # => full tag
-    index_of_href = tag.find('href') 
-    tag_sup = tag[index_of_href + 6:] # => cutting everything up to href
+    tags = soup.find_all('a', {"class": "a-link-normal a-text-normal"})
 
-    index_of_end = tag_sup.find('"')
-    only_link = tag_sup[:index_of_end] # => cutting everything after ("), so i get only link
+    for tag in tags:
+        tag = str(tag) # => full tag
+        index_of_href = tag.find('href') 
+        tag_sup = tag[index_of_href + 6:] # => cutting everything up to href
 
-    working_link = only_link.replace('amp;', '') # => removing apm;
+        index_of_end = tag_sup.find('"')
+        only_link = tag_sup[:index_of_end] # => cutting everything after ("), so i get only link
 
-    full_link = amazon_link + working_link # => adding base amazon link to specific link
+        working_link = only_link.replace('amp;', '') # => removing apm;
 
-    #print(i, "-->", full_link, "\n")
+        full_link = amazon_link + working_link # => adding base amazon link to specific link
 
-    links.append(full_link)
+        print(idx, "-->", full_link, "\n")
 
+        links.append(full_link)
+#END LOOP
 print('############################## STARTING TO ENTER EACH LINK #############################\n')
 
 title_arr = []
@@ -54,7 +59,7 @@ for idx, link in enumerate(links):
     
     print(f'-------------START ITEM NUMBER {idx}/{num_of_links} ------------- \n')
 
-    value = (random() * 5) + 1
+    value = (random() * 2) + 1
     print('Time sleep ', value)
     time.sleep(value)
 
@@ -86,6 +91,7 @@ for idx, link in enumerate(links):
         review = soup.find('span', {"id": "acrCustomerReviewText"}).text # => 68 ratings
         review_num_arr = review.split(" ")[:-1] # => ['68']
         review_num = review_num_arr[0] # => 68
+        review_num = review_num.replace(",", "")
         print('---> Review numbers: ', review_num)
     except: 
         review = 'Review not found!'
