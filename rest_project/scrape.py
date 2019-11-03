@@ -22,7 +22,6 @@ tags = soup.find_all('a', {"class": "a-link-normal a-text-normal"})
 
 links = []
 
-i = 1
 for tag in tags:
     tag = str(tag) # => full tag
     index_of_href = tag.find('href') 
@@ -39,8 +38,6 @@ for tag in tags:
 
     links.append(full_link)
 
-    i += 1
-
 print('############################## STARTING TO ENTER EACH LINK #############################\n')
 
 title_arr = []
@@ -51,12 +48,13 @@ owner_arr = []
 
 from random import random
 
-i = 0
-for link in links:
-    
-    print(f'-------------START ITEM NUMBER {i} ------------- \n')
+num_of_links = len(links)
 
-    value = (random() * 10) + 1
+for idx, link in enumerate(links):
+    
+    print(f'-------------START ITEM NUMBER {idx}/{num_of_links} ------------- \n')
+
+    value = (random() * 5) + 1
     print('Time sleep ', value)
     time.sleep(value)
 
@@ -64,88 +62,90 @@ for link in links:
 
     soup = make_soup(url)
 
+    have_all_items = True
+
     try:
         title = soup.find('span', {"id":"productTitle"}).text.strip()
-        title_arr.append(title)
         print('---> Title: ', title)
     except:
         title = 'Title not found!'
-        title_arr.append(title)
+        have_all_items = False
         print('---> Title: ', title)
 
     try:
         rating = soup.find('span', {"class": "a-size-medium a-color-base"}).text[:3]
-        rating_arr.append(rating)
+        if " " in rating:
+            rating = rating[:1]
         print('---> Rating: ', rating)
     except:
         rating = 'Rating not found!'
-        rating_arr.append(rating) 
+        have_all_items = False
         print('---> Rating: ', rating)
 
     try:
         review = soup.find('span', {"id": "acrCustomerReviewText"}).text # => 68 ratings
         review_num_arr = review.split(" ")[:-1] # => ['68']
         review_num = review_num_arr[0] # => 68
-        review_arr.append(review_num)
         print('---> Review numbers: ', review_num)
     except: 
         review = 'Review not found!'
-        review_arr.append(review_num)
+        have_all_items = False
         print('---> Review numbers: ', review_num)
 
     try:
         price = soup.find('span', {"id": "priceblock_ourprice"}).text
         price = price.replace("$", "")
-        price_arr.append(price)
         print('---> Price: ', price)
     except:
         price = 'Price not found!'
-        price_arr.append(price)
+        have_all_items = False
         print('---> Price: ', price)
 
     try:
         owner = soup.find('a', {"id": "bylineInfo"}).text
-        owner_arr.append(owner)
         print('---> Owner: ', owner)
     except:
         owner = 'Owner not found!'
-        owner_arr.append(owner)
+        have_all_items = False
         print('---> Owner: ', owner)
-    print(f'-------------END ITEM NUMBER {i} ------------- \n')
 
-    i += 1
+    print('\n--->Amazon link ', link, '\n')
+
+    if(have_all_items):
+        title_arr.append(title)
+        rating_arr.append(rating)
+        review_arr.append(review_num)
+        price_arr.append(price)
+        owner_arr.append(owner)
+        print("\n Item appended!")
+    else:
+        print("\n Item not appended!")
+        continue
+
+    print(f'-------------END ITEM NUMBER {idx} ------------- \n')
 
 print('\n############################## SCRAPE ENDED #############################\n')
 
 print('------All titles------')
-i = 0
-for t in title_arr:
-    print(i, t)
-    i += 1
+for idx, t in enumerate(title_arr):
+    print(idx, t)
 
 print('------All ratings------')
-i = 0
-for r in rating_arr:
-    print(i, r)
-    i += 1
+
+for idx, r in enumerate(rating_arr):
+    print(idx, r)
 
 print('------All reviews------')
-i = 0
-for rw in review_arr:
-    print(i, rw)
-    i += 1
+for idx, rw in enumerate(review_arr):
+    print(idx, rw)
 
 print('------All price------')
-i = 0
-for p in price_arr:
-    print(i, p)
-    i += 1
+for idx, p in enumerate(price_arr):
+    print(idx, p)
 
 print('------All owners------')
-i = 0
-for o in owner_arr:
-    print(i, o)
-    i += 1
+for idx, o in enumerate(owner_arr):
+    print(idx, o)
 
 '''
 url = 'https://www.amazon.com/Dri-Fit-Training-Athletic-Essentials-Undershirt/dp/B07J2QWHY4/ref=sr_1_2_sspa?crid=1B2U37K00A1OH&keywords=t-shirts+for+men&qid=1572206033&sprefix=t-s%2Caps%2C270&sr=8-2-spons&psc=1&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUEyNE5GUDRQUlFMMVI4JmVuY3J5cHRlZElkPUEwMDA4NjA4MjlVUlVWQjdLVERVSCZlbmNyeXB0ZWRBZElkPUEwMTE5MDk2NUtUTTVQUllERzYmd2lkZ2V0TmFtZT1zcF9hdGYmYWN0aW9uPWNsaWNrUmVkaXJlY3QmZG9Ob3RMb2dDbGljaz10cnVl'
