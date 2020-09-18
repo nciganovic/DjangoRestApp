@@ -96,7 +96,7 @@ for idx, link in enumerate(links):
     except: 
         review = 'Review not found!'
         have_all_items = False
-        print('---> Review numbers: ', review_num)
+        print('---> Review numbers: ', review)
 
     try:
         price = soup.find('span', {"id": "priceblock_ourprice"}).text
